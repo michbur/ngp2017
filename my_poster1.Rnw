@@ -1,0 +1,364 @@
+\documentclass[final]{beamer}
+\usepackage{grffile}
+\mode<presentation>{\usetheme{CambridgeUSPOL}}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{polski}
+\usepackage{graphicx}
+\usepackage{array,booktabs,tabularx}
+\usepackage{epstopdf}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\newcolumntype{Z}{>{\centering\arraybackslash}X}
+
+% rysunki
+\usepackage{tikz}
+\usepackage{ifthen}
+\usepackage{xxcolor}
+\usetikzlibrary{arrows}
+\usetikzlibrary[topaths]
+\usetikzlibrary{decorations.pathreplacing}
+%\usepackage{times}\usefonttheme{professionalfonts}  % times is obsolete
+\usefonttheme[onlymath]{serif}
+\boldmath
+\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}                       % e.g. for DIN-A0 poster
+%\usepackage[orientation=portrait,size=a1,scale=1.4,grid,debug]{beamerposter}                  % e.g. for DIN-A1 poster, with optional grid and debug output
+%\usepackage[size=custom,width=200,height=120,scale=2,debug]{beamerposter}                     % e.g. for custom size poster
+%\usepackage[orientation=portrait,size=a0,scale=1.0,printer=rwth-glossy-uv.df]{beamerposter}   % e.g. for DIN-A0 poster with rwth-glossy-uv printer check
+% ...
+%
+
+\definecolor{red1}{RGB}{254,240,217}
+\definecolor{red2}{RGB}{253,204,138}
+\definecolor{red3}{RGB}{252,141,89}
+\definecolor{red4}{RGB}{227,74,51}
+\definecolor{red5}{RGB}{179,0,0}
+\usecolortheme{seagull}
+\useinnertheme{rectangles}
+\setbeamercolor{item projected}{bg=darkred}
+% \setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{caption}{\insertcaption} 
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+\setbeamercolor{block title}{fg=red5,bg=red1}
+\setbeamercolor{block body}{fg=black,bg=white}
+\setbeamercolor{local structure}{fg=darkred}
+
+\setbeamercolor*{enumerate item}{fg=darkred}
+\setbeamercolor*{enumerate subitem}{fg=darkred}
+\setbeamercolor*{enumerate subsubitem}{fg=darkred}
+
+\setbeamercolor*{itemize item}{fg=darkred}
+\setbeamercolor*{itemize subitem}{fg=darkred}
+\setbeamercolor*{itemize subsubitem}{fg=darkred}
+
+\newlength{\columnheight}
+\setlength{\columnheight}{94.5cm}
+\renewcommand{\thetable}{}
+\def\andname{,}
+\authornote{}
+
+\renewcommand{\APACrefatitle}[2]{}
+\renewcommand{\bibliographytypesize}{\footnotesize} 
+\renewcommand{\APACrefYearMonthDay}[3]{%
+  {\BBOP}{#1}
+  {\BBCP}
+}
+
+\begin{document}
+
+<<knitrIntro, echo = FALSE, message=FALSE,warning=FALSE>>=
+source("my_ggplot_theme.R")
+
+library(dplyr)
+library(reshape2)
+library(xtable)
+library(biogram)
+
+
+@
+
+
+\date{}
+\author{\large Micha\l{} Burdukiewicz\inst{1}*, Piotr Sobczyk\inst{2}, Stefan R\"{o}diger\inst{3}, Marlena G\k{a}sior-Głogowska\inst{4}, \\ Pawe\l{} Mackiewicz\inst{1} and Ma\l{}gorzata Kotulska\inst{4}\\
+\normaltext{*michalburdukiewicz@gmail.com} $\diamondsuit$ \normaltext{michbur@github}}
+\institute{\small{\textsuperscript{1}University of Wroc\l{}aw, Department of Genomics,
+\textsuperscript{2}Wroc\l{}aw University of Science and Technology, Faculty of Pure and Applied Mathematics,
+\textsuperscript{3}Brandenburg University of Technology Cottbus-Senftenberg, Institute of Biotechnology,
+\textsuperscript{4}Wroc\l{}aw University of Science and Technology, Department of Biomedical Engineering
+}
+}
+
+%Computational and experimental validation of amyloid databases
+%Problems with annotation and computational prediction of peptide amyloidogenicity
+\title{\huge Challenges in the computational prediction of peptide amyloidogenicity}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{.53\textwidth}
+\begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+\begin{minipage}[T]{.95\textwidth}
+\parbox[t][\columnheight]{\textwidth}
+{
+\begin{block}{Introduction}
+
+Amyloids are proteins associated with the number of clinical disorders (e.g., Alzheimer's, Creutzfeldt-Jakob's and Huntington's diseases). Despite their diversity, all amyloid proteins can undergo aggregation initiated by 6- to \mbox{15-residue} segments called hot spots. To find the patterns defining the hot-spots, we trained predictors of amyloidogenicity based on random forests using short subsequences (n-grams) extracted from amyloidogenic and non-amyloidogenic peptides collected in the AmyLoad database.
+
+\end{block}
+
+\begin{block}{Analysis workflow}
+\begin{figure} 
+\includegraphics[width=0.87\columnwidth]{static_figure/ngram_scheme_poster.eps}
+\end{figure}
+
+    \end{block}
+
+
+\begin{block}{Results of cross-validation}
+
+The amyloidogenicity of a given peptide may not depend on the exact sequence of 
+amino acids but on its more general properties. 
+Henceforth, we created 524,284 amino acid reduced alphabets (from three to six letters) based on physicochemical properties relevant to amyloidogenicity. 
+
+Distribution of mean AUC values of classifiers with various encodings 
+for every possible combination of training and testing data set including 
+different lengths of sequences. 
+
+<<echo = FALSE,message=FALSE,fig.align='center',fig.width=14,fig.height=5.8,warning=FALSE>>=
+amyloids_plot <- read.csv("amyloid_plot_data.csv")
+
+ggplot(amyloids_plot, aes(x = len_range, y = AUC_mean)) +
+  geom_boxplot(outlier.color = "grey", outlier.shape = 1) +
+  geom_point(data = filter(amyloids_plot, et != "Encoding"), 
+             aes(x = len_range, y = AUC_mean, color = et, shape = et), size = 4) +
+  scale_x_discrete("") +
+  scale_y_continuous("Mean AUC") +
+  scale_shape_manual("", values = c(16, 1, 15, 15), drop = FALSE) +
+  scale_color_manual("", values = c("red", "grey", "green", "blue"), drop = FALSE) +
+  facet_wrap(~ pos, nrow = 3) +
+  my_theme + 
+  coord_flip()
+@
+
+\tiny
+The 
+gray circles correspond to the encodings with the AUC outside the 0.95 
+confidence interval.
+
+\normalsize	
+\bigskip
+The predictor based on the best-performing encoding reached the highest AUC (0.8667) 
+in classification of the shortest sequences (with the length of 6 residues).
+
+\bigskip
+
+Classifiers based on the full (i.e., unreduced) amino acid alphabet never predicted 
+amyloidogenicity better than the best classifier based on the reduced alphabet. 
+
+\bigskip
+
+The standard encodings found in the literature performed worse than other 
+analyzed encodings in most categories.
+
+\end{block}
+\vfill
+
+
+% \begin{block}{Quick Permutation Test (QuiPT)}
+%     Model and statistic independent permutation tests can be used to filter features obtained through counting n-grams.
+%     
+%     During a permutation test class labels are randomly exchanged during computation of a significance statistic. p-values are defined as:
+%     
+% \begin{center}
+% \scalebox{0.85}{
+% $      
+% \textnormal{p-value} = \frac{N_{T_P > T_R}}{N}
+% $
+% }
+% \end{center}
+% 
+% where $N_{T_P > T_R}$ is number of times when $T_P$ (permuted test statistic) was more extreme than $T_R$ (test statistic for non-permuted data).
+% 
+% Permutation tests are computationally expensive (especially considering precise estimation of small p-values, because the number of permutations is inversely proportional to the interval between p-values).
+% 
+% \medskip
+% 
+% \textbf{Qui}ck \textbf{P}ermutation \textbf{T}est (QuiPT) thanks to the unique parameterization replaces a permutation test with the exact two-sided Fisher's test~\citep{lehmann1986testing} reducing the computation cost. 
+%       
+%     \end{block}
+
+\vfill
+
+
+
+
+}
+\end{minipage}
+\end{beamercolorbox}
+\end{column}
+
+
+%new column ------------------------------------------------------    
+
+\begin{column}{.48\textwidth}
+\begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+\begin{minipage}[T]{.95\textwidth}  
+\parbox[t][\columnheight]{\textwidth}
+{
+
+
+
+
+\begin{block}{Informative n-grams}
+<<echo = FALSE,message=FALSE,fig.align='center',fig.width=14,fig.height=8.9,warning=FALSE>>=
+ngram_freq <- read.csv("ngram_freq.csv")
+
+gr_aa <- encoding2df(AmyloGram::AmyloGram_model[["enc"]]) %>% 
+  mutate(element = as.character(element),
+         element = toupper(element)) %>%  
+  group_by(gr_id) %>% 
+  summarise(gr = paste0("{", paste0(element, collapse = ""), "}")) 
+
+ngram_freq_plot <- mutate(ngram_freq, decoded_name = gsub("_", "X", decoded_name)) %>%
+  mutate(decoded_name = factor(decoded_name, levels = as.character(decoded_name)),
+         amyloid = diff_freq > 0) %>%
+  melt() %>%
+  filter(variable %in% c("pos", "neg"),
+         association != "Not found") %>%
+  droplevels %>%
+  mutate(variable = factor(variable, labels = c("Amyloid", "Non-amyloid")))
+
+for(i in 1L:6)
+  levels(ngram_freq_plot[["decoded_name"]]) <- gsub(as.character(i), gr_aa[i, "gr"],
+                                                    levels(ngram_freq_plot[["decoded_name"]]))
+
+ggplot(ngram_freq_plot, aes(x = decoded_name, y = value)) +
+  geom_bar(aes(fill = variable), position = "dodge", stat = "identity") +
+  geom_point(data = group_by(ngram_freq_plot, decoded_name)  %>% filter(value == max(value)),
+             aes(y = value + 0.004, shape = association), size = 6) +
+  scale_fill_manual("", values = c("#d17312", "#04d1b2")) +
+  scale_shape_manual("Motif:", breaks = c("Amyloidogenic", "Non-amyloidogenic"), values = c(16, 17, NA)) +
+  scale_y_continuous("Frequency") +
+  scale_x_discrete("") +
+  my_theme +
+  theme(panel.grid.major.y = element_line(color = "lightgrey", size = 0.5)) +
+  coord_flip()
+
+@
+
+The frequency of important n-grams used by the best-performing 
+classifier in amyloid and non-amyloid sequences. The elements of n-grams are 
+amino acids encoded using the best-performing reduced amino acid alphabet. 
+X represents any amino acid. Dots and triangles 
+denote n-grams occurring in motifs found in respectively amyloidogenic and 
+non-amyloidogenic sequences~\citep{paz_sequence_2004}.
+
+\end{block}
+\vfill
+
+
+
+\begin{block}{Benchmark results}
+
+\begin{table}[ht]
+\centering
+
+\begin{tabular}{ccccc}
+  \toprule
+Classifier & AUC & MCC & Sens. & Spec. \\ 
+  \midrule
+AmyloGram & \textbf{0.8972} & \textbf{0.6307} & 0.8658 & 0.7889 \\ 
+  \rowcolor{gray!30}PASTA 2.0 \citep{walsh_pasta_2014} & 0.8550 & 0.4291 & 0.3826 & \textbf{0.9519} \\ 
+   FoldAmyloid \citep{garbuzynskiy_foldamyloid:_2010} & 0.7351 & 0.4526 & 0.7517 & 0.7185 \\ 
+  \rowcolor{gray!30}APPNN \citep{familia_prediction_2015} & 0.8343 & 0.5823 & \textbf{0.8859} & 0.7222 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
+
+The predictor based on the best-performing alphabet, called AmyloGram, was benchmarked against the most popular tools for the detection of amyloid peptides using an external data set \textit{pep424}.
+
+\end{block}
+\vfill
+
+
+\begin{block}{Experimental validation}
+
+Using AmyloGram we analyzed all peptides from AmyLoad database. Eight peptides, described in the database as non-amyloids and assesed by AmyloGram with the highest probability of amyloidogenicity, were validated experimentally using Fourier transform infrared spectroscopy.
+
+<<echo = FALSE,message=FALSE,fig.align='center',fig.width=14,fig.height=5.7,warning=FALSE>>=
+ftir_res <- read.csv("ftir_amylogram_pasta2_literature.csv")
+
+ftir_res_agg <- ftir_res %>% 
+  group_by(amyl_db, amyl_ftir) %>% 
+  summarise(count = n()) %>% 
+  ungroup() %>% 
+  mutate(amyl_db = factor(amyl_db, labels = c("Non-amyloid", "Amyloid")),
+         amyl_ftir = factor(amyl_ftir, labels = c("Non-amyloid", "Amyloid"))) %>% 
+  filter(amyl_db == "Non-amyloid",
+         !is.na(amyl_ftir)) %>% 
+  mutate(count = ifelse(count == 7, 4, count)) %>% 
+  rbind(data.frame(amyl_db = "Non-amyloid", amyl_ftir = "Amyloid", count = 3)) %>% 
+  mutate(frac = count/sum(count),
+         count_nice = ifelse(count > 2, paste0(count, " peptides"), paste0(count, " peptide")),
+         amyl_db = factor(c("No data", 
+                            "No data", 
+                            "Amyloid")))
+
+ggplot(ftir_res_agg, aes(x = amyl_ftir, y = frac, fill = amyl_db,
+                         label = count_nice)) +
+  geom_bar(stat = "identity") +
+  geom_text(position = position_stack(vjust=0.5), color = "black", size = 8) +
+  scale_y_continuous("Fraction of peptides") +
+  scale_x_discrete("FTIR result") +
+  scale_fill_manual("Literature data", values = c("#d17312", "lightgrey"),
+                    na.value = "lightgrey") +
+  my_theme
+@
+
+Seven out of eight peptides had amyloidogenic properties. In addition, three of them were annotated as amyloids by other research groups.
+
+\end{block}
+\vfill
+
+
+\begin{block}{Summary and funding}
+Thanks to the reduction of the amino acid alphabet and description of peptides by 
+short sub-sequences (n-grams), we were able to create the efficient predictor 
+of amyloidogenic sequences called AmyloGram.
+
+\bigskip
+
+Our software is avaible as a web-server: \url{www.smorfland.uni.wroc.pl/shiny/AmyloGram/} and \textbf{R} package: \url{https://cran.r-project.org/package=AmyloGram}.
+
+\bigskip
+
+See AmyloGram preprint: \url{https://peerj.com/preprints/2390/}.
+
+\bigskip
+
+n-gram analysis in R: \url{https://cran.r-project.org/package=biogram}
+
+\small{This research was partially funded by National Science Center (2015/17/N/NZ2/01845).}
+
+\end{block}
+\vfill
+
+ \begin{block}{Bibliography}
+  \tiny{
+  \bibliographystyle{apalike}
+  \bibliography{references}
+  }
+  \end{block}
+  \vfill  
+
+
+}
+\end{minipage}
+\end{beamercolorbox}
+\end{column}
+\end{columns}  
+\end{frame}
+\end{document}
