@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.8.25)  30 AUG 2017 11:59
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.8.25)  30 AUG 2017 12:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1316,10 +1316,10 @@ Here is how much of TeX's memory you used:
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on presentation.pdf (2 pages, 73673 bytes).
+Output written on presentation.pdf (2 pages, 70723 bytes).
 PDF statistics:
- 171 PDF objects out of 1000 (max. 8388607)
- 113 compressed objects within 2 object streams
+ 143 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
  4 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 

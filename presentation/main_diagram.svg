@@ -2460,9 +2460,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.212814"
-     inkscape:cx="395.60946"
-     inkscape:cy="272.22599"
+     inkscape:zoom="3.430356"
+     inkscape:cx="642.81412"
+     inkscape:cy="146.64351"
      inkscape:document-units="px"
      inkscape:current-layer="g8210"
      showgrid="false"
@@ -2480,7 +2480,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -7202,54 +7202,6 @@
               </g>
             </g>
             <g
-               id="g8228">
-              <g
-                 clip-path="url(#clipPath8232)"
-                 id="g8230">
-                <path
-                   id="path8236"
-                   style="fill:none;stroke:#ebebeb;stroke-width:5.26357317;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,643.012 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8238">
-              <g
-                 clip-path="url(#clipPath8242)"
-                 id="g8240">
-                <path
-                   id="path8246"
-                   style="fill:none;stroke:#ebebeb;stroke-width:5.26357317;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,1034.26 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8248">
-              <g
-                 clip-path="url(#clipPath8252)"
-                 id="g8250">
-                <path
-                   id="path8256"
-                   style="fill:none;stroke:#ebebeb;stroke-width:5.26357317;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,1425.51 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8258">
-              <g
-                 clip-path="url(#clipPath8262-6)"
-                 id="g8260">
-                <path
-                   id="path8266"
-                   style="fill:none;stroke:#ebebeb;stroke-width:5.26357317;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,1816.72 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
                id="g8268">
               <g
                  clip-path="url(#clipPath8272-6)"
@@ -7258,66 +7210,6 @@
                    id="path8276"
                    style="fill:none;stroke:#ebebeb;stroke-width:10.52716637;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
                    d="m 488.91,447.379 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8278">
-              <g
-                 clip-path="url(#clipPath8282)"
-                 id="g8280">
-                <path
-                   id="path8286"
-                   style="fill:none;stroke:#ebebeb;stroke-width:10.52716637;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,838.629 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8288">
-              <g
-                 clip-path="url(#clipPath8292)"
-                 id="g8290">
-                <path
-                   id="path8296"
-                   style="fill:none;stroke:#ebebeb;stroke-width:10.52716637;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,1229.88 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8298">
-              <g
-                 clip-path="url(#clipPath8302)"
-                 id="g8300">
-                <path
-                   id="path8306"
-                   style="fill:none;stroke:#ebebeb;stroke-width:10.52716637;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 488.91,1621.13 2336.29,0"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8308">
-              <g
-                 clip-path="url(#clipPath8312)"
-                 id="g8310">
-                <path
-                   id="path8316"
-                   style="fill:none;stroke:#ebebeb;stroke-width:10.52716637;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 1126.09,378.91 0,1506.29"
-                   inkscape:connector-curvature="0" />
-              </g>
-            </g>
-            <g
-               id="g8318">
-              <g
-                 clip-path="url(#clipPath8322)"
-                 id="g8320">
-                <path
-                   id="path8326"
-                   style="fill:none;stroke:#ebebeb;stroke-width:10.52716637;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-                   d="m 2188.05,378.91 0,1506.29"
                    inkscape:connector-curvature="0" />
               </g>
             </g>
