@@ -1,0 +1,37 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{array,booktabs,tabularx}
+\usepackage{epstopdf}
+\usepackage{colortbl, xcolor}
+
+
+\newcommand\Fontvi{\fontsize{6}{7.2}\selectfont}
+
+\title{Modelling amyloidogenic scaffolds of biofilms}
+\date{}
+\author{Micha\l{} Burdukiewicz\inst{1}*, Piotr Sobczyk\inst{2}, Stefan R\"{o}diger\inst{3}, Marlena G\k{a}sior-Głogowska\inst{4}, Pawe\l{} Mackiewicz\inst{1} and Ma\l{}gorzata Kotulska\inst{4}}
+\institute{\textsuperscript{1}University of Wroc\l{}aw, Department of Genomics, \\
+\textsuperscript{2}Wroc\l{}aw University of Science and Technology, Faculty of Pure and Applied Mathematics, \\
+\textsuperscript{3}Brandenburg University of Technology Cottbus-Senftenberg, Institute of Biotechnology, \\
+\textsuperscript{4}Wroc\l{}aw University of Science and Technology, Department of Biomedical Engineering
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{} 
+\includegraphics[width=1.02\textwidth]{main_diagram.pdf}
+
+Peptides should be tested in a wider experimental setting because some may display amyloid properties only under specific conditions.
+Find us: \url{https://cran.r-project.org/package=AmyloGram}.
+\end{frame}   
+
+
+
+\end{document}

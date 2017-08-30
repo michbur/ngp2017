@@ -21,7 +21,8 @@ ggplot(preds, aes(x = Probability)) +
   scale_color_manual(values = c(rgb(0, 156, 219, maxColorValue = 255),
                                 rgb(255, 65, 50, maxColorValue = 255))) +
   guides(color = FALSE) +
-  theme(panel.grid.major = element_blank())
+  theme(panel.grid.major = element_blank(),
+        plot.background = element_blank())
 dev.off()
 
 
@@ -40,7 +41,8 @@ ggplot(preds, aes(x = Probability)) +
   geom_line(data = arrow_df, aes(x = x, y = y), arrow=arrow(length=unit(4, "mm"))) +
   theme_bw() +
   guides(color = FALSE) +
-  theme(panel.grid.major = element_blank())
+  theme(panel.grid.major = element_blank(),
+        plot.background = element_blank())
 dev.off()
 
 # results plot ------------------------------
@@ -58,20 +60,24 @@ ftir_res_agg <- ftir_res %>%
   rbind(data.frame(amyl_db = "Non-amyloid", amyl_ftir = "Amyloid", count = 3)) %>% 
   mutate(frac = count/sum(count),
          count_nice = ifelse(count > 2, paste0(count, " peptides"), paste0(count, " peptide")),
-         amyl_db = factor(c("No data", 
-                            "No data", 
-                            "Amyloid")))
+         amyl_db = factor(c("Non-amyloid", 
+                            "Amyloid", 
+                            "Amyloid (literature)")),
+         amyl_db = factor(amyl_db, levels = levels(amyl_db)[c(3, 1, 2)]))
 
 cairo_ps(filename = "presentation_barlot.eps", width = 4, height = 2.7, pointsize = 24)
 ggplot(ftir_res_agg, aes(x = amyl_ftir, y = frac, fill = amyl_db,
                          label = count_nice)) +
   geom_bar(stat = "identity") +
-  geom_text(position = position_stack(vjust = 0.5), color = "black", size = 6) +
+  geom_text(position = position_stack(vjust = 0.5), color = "black", size = 4) +
   scale_y_continuous("Fraction of peptides") +
   scale_x_discrete("Experimental result") +
-  scale_fill_manual("Literature data", values = c(rgb(255, 65, 50, maxColorValue = 255), "lightgrey"),
-                    na.value = "lightgrey") +
+  scale_fill_manual("", values = c(rgb(0, 156, 219, maxColorValue = 255),
+                                   rgb(255, 65, 50, maxColorValue = 255),
+                                   rgb(255, 170, 0, maxColorValue = 255))) +
   theme_bw() +
   theme(legend.key.size = unit(0.3, "in"),
-        legend.position=c(0.2, 0.75))
+        legend.position = c(0.25, 0.75),
+        legend.background = element_blank(),
+        plot.background = element_blank())
 dev.off()
