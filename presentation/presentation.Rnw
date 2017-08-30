@@ -29,7 +29,7 @@
 \includegraphics[width=1.02\textwidth]{main_diagram.pdf}
 
 Peptides should be tested in a wider experimental setting because some may display amyloid properties only under specific conditions.
-Find us: \url{https://cran.r-project.org/package=AmyloGram}.
+Find us online: \url{http://tinyurl.com/AmyloGram}.
 \end{frame}   
 
 
