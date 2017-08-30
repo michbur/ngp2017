@@ -9,7 +9,7 @@ pred_freq <- (as.vector(table(preds[["Probability"]] > 0.5)/nrow(preds))*100) %>
 
 
 
-cairo_ps(filename = "presentation_plot.eps", width = 3, height = 3, pointsize = 24)
+cairo_ps(filename = "negative_hist.eps", width = 3*0.9, height = 3*0.9, pointsize = 24)
 ggplot(preds, aes(x = Probability)) +
   geom_histogram(fill = rgb(0, 156, 219, maxColorValue = 255)) +
   geom_histogram(data = filter(preds, Probability > 0.5), 
@@ -20,6 +20,25 @@ ggplot(preds, aes(x = Probability)) +
   theme_bw() +
   scale_color_manual(values = c(rgb(0, 156, 219, maxColorValue = 255),
                                 rgb(255, 65, 50, maxColorValue = 255))) +
+  guides(color = FALSE) +
+  theme(panel.grid.major = element_blank())
+dev.off()
+
+
+
+# peptides of interest --------------------------------
+arrow_df <- data.frame(x = c(0.82, 0.82), y = c(70, 15))
+
+cairo_ps(filename = "negative_hist_poi.eps", width = 3*0.9, height = 3*0.9, pointsize = 24)
+ggplot(preds, aes(x = Probability)) +
+  geom_histogram(fill = rgb(0, 156, 219, maxColorValue = 255)) +
+  geom_histogram(data = filter(preds, Probability > 0.5), 
+                 fill = rgb(255, 65, 50, maxColorValue = 255)) +
+  scale_x_continuous("Probability of amyloidogenicity") +
+  scale_y_continuous("Number of non-amyloid peptides") +
+  geom_rect(xmin = 0.75, xmax = 0.9, ymin = -0.2, ymax = 10, color = "black", fill = NA) +
+  geom_line(data = arrow_df, aes(x = x, y = y), arrow=arrow(length=unit(4, "mm"))) +
+  theme_bw() +
   guides(color = FALSE) +
   theme(panel.grid.major = element_blank())
 dev.off()
@@ -43,12 +62,16 @@ ftir_res_agg <- ftir_res %>%
                             "No data", 
                             "Amyloid")))
 
+cairo_ps(filename = "presentation_barlot.eps", width = 4, height = 2.7, pointsize = 24)
 ggplot(ftir_res_agg, aes(x = amyl_ftir, y = frac, fill = amyl_db,
                          label = count_nice)) +
   geom_bar(stat = "identity") +
-  geom_text(position = position_stack(vjust=0.5), color = "black", size = 8) +
+  geom_text(position = position_stack(vjust = 0.5), color = "black", size = 6) +
   scale_y_continuous("Fraction of peptides") +
-  scale_x_discrete("FTIR result") +
-  scale_fill_manual("Literature data", values = c("#d17312", "lightgrey"),
+  scale_x_discrete("Experimental result") +
+  scale_fill_manual("Literature data", values = c(rgb(255, 65, 50, maxColorValue = 255), "lightgrey"),
                     na.value = "lightgrey") +
-  theme_bw()
+  theme_bw() +
+  theme(legend.key.size = unit(0.3, "in"),
+        legend.position=c(0.2, 0.75))
+dev.off()
